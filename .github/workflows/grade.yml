@@ -1,0 +1,27 @@
+name: grade
+
+# Fast feedback on push. Your official grade comes from the platform's **Run Test** button
+# (it runs the hidden tests server-side). This workflow only runs tests YOU commit under tests/
+# or dayNN/test_*.py; with none committed it simply passes, so a green check means "pushed OK".
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run committed tests (if any)
+        run: |
+          if ls tests/test_*.py day*/test_*.py >/dev/null 2>&1; then
+            echo "Found tests — installing deps and running pytest."
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pytest -q
+          else
+            echo "No committed tests. Your work is graded in the platform via Run Test. ✓"
+          fi

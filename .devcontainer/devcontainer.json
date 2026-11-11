@@ -1,0 +1,24 @@
+{
+  "name": "atria-supportiq",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends sqlite3 jq && pip install --no-cache-dir -r requirements.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  },
+  "forwardPorts": [8000, 8501, 4200, 5000],
+  "portsAttributes": {
+    "8000": { "label": "FastAPI" },
+    "8501": { "label": "Streamlit" },
+    "5000": { "label": "MLflow UI" }
+  },
+  "remoteUser": "vscode"
+}

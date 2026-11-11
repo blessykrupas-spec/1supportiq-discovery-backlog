@@ -1,0 +1,44 @@
+# Atria SupportIQ Engineering Stack (Year 3) — lab environment (CPU-only, Python 3.11)
+# Package set VERIFIED against the course's coding questions + labs (import scan, 2026-11-07).
+# Data/ML core is pinned for reproducibility; the framework/MLOps/LLM layer is left to pip's
+# resolver because mlflow + prefect + mcp + openai + fastapi constrain pydantic in different
+# ways and a hand-pinned set conflicts. Resolution verified clean on python:3.11.
+
+# Core data / ML (pinned)
+numpy==1.26.4
+pandas==2.2.2
+pyarrow==15.0.2
+scipy==1.13.1
+scikit-learn==1.5.1
+matplotlib==3.9.1
+joblib==1.4.2
+
+# Web / API
+fastapi
+uvicorn
+pydantic
+
+# LLM / RAG (API-based; no local GPU models)
+openai
+
+# MLOps / orchestration / observability / load
+mlflow
+prefect
+prometheus-client
+locust
+
+# Contracts / resilience / MCP
+jsonschema
+openapi-spec-validator
+tenacity
+mcp
+
+# HTTP / env / SQL
+requests
+httpx
+python-dotenv
+psycopg[binary]
+
+# Testing
+pytest
+pytest-cov
